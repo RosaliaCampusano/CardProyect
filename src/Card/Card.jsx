@@ -1,5 +1,6 @@
 import Objectives from "./Objectives";
 import Rewards from "./Rewards";
+import cardTemplate from "../assets/card-template.png";
 
 function Card(quest) {
   console.log(quest);
@@ -13,25 +14,22 @@ function Card(quest) {
     levelRequirement,
   } = quest.quest.quest;
 
-  const color = isActive ? "green" : "black";
-  const colorLetter = isActive ? "black" : "red";
-
   return (
     <div
+      className="card"
       style={{
-        color: colorLetter,
-        borderStyle: "inset",
-        borderRadius: "10px",
-        width: "500px",
-        minHeight: "70vh",
-        border: `10px solid ${color}`,
-        margin: "20px",
+        filter: isActive ? "none" : "grayscale(100%) brightness(40%)",
+        backgroundImage: `url(${cardTemplate})`,
       }}
     >
-      <h1>{title}</h1>
-      <p>{description}</p>
-      <Objectives objectives={objectives} location={location} />
-      <Rewards rewards={rewards} levelRequiment={levelRequirement} />
+      <div className="card-content-wrapper">
+        <div className="card-content">
+          <h1>{title}</h1>
+          <p>{description}</p>
+          <Objectives objectives={objectives} location={location} />
+          <Rewards rewards={rewards} levelRequirement={levelRequirement} />
+        </div>
+      </div>
     </div>
   );
 }
