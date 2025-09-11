@@ -1,28 +1,45 @@
-function Objectives({ objectives, location }) {
+function Objectives({ objectives, setObjectives }) {
+  console.log(objectives);
+  const updateItem = (itemId, isCompleted) => {
+    setObjectives(
+      objectives.map((elem) => {
+        if (elem.id === itemId) {
+          return { ...elem, completed: isCompleted };
+        } else {
+          return elem;
+        }
+      })
+    );
+  };
   return (
     <div className="objectives-container">
-      <p>Objectives: </p>
-      <ul style={{ padding: "10px", listStyleType: "none", margin: "0" }}>
+      <ul
+        style={{
+          padding: "10px",
+          listStyleType: "none",
+          margin: "0",
+        }}
+      >
+        <p>Objectives: </p>
         {objectives.map((elem) => (
           <li key={elem.id}>
             <label>
-              <input type="checkbox" checked={elem.completed} disabled />
-              {elem.description}
+              <input
+                type="checkbox"
+                checked={elem.completed}
+                onClick={() => {
+                  updateItem(elem.id, !elem.completed);
+                }}
+              />
+              <strong
+                style={{ fontFamily: "Medievalsharp Bold", color: "gray" }}
+              >
+                {elem.description}
+              </strong>
             </label>
           </li>
         ))}
       </ul>
-      <Location location={location} />
-    </div>
-  );
-}
-
-function Location({ location }) {
-  return (
-    <div className="location-container">
-      <p>
-        {location.zone} {location.coordinates.x}, {location.coordinates.y}
-      </p>
     </div>
   );
 }

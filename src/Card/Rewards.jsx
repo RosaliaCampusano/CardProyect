@@ -1,4 +1,6 @@
-function Rewards({ rewards, levelRequirement }) {
+import { Tooltip as ReactTooltip } from "react-tooltip";
+
+function Rewards({ rewards, levelRequirement, isActive }) {
   const getEmoji = (item) => {
     if (item.isUnique) return "👑";
     switch (item.type) {
@@ -22,28 +24,30 @@ function Rewards({ rewards, levelRequirement }) {
     }
   };
 
-  ///// Event Onclick to show the name in a tooltip.
-
   return (
     <div className="rewards-container">
-      <p>
-        <strong>Level Requirement:</strong> {levelRequirement}
-      </p>
-      <p>
-        <strong>Experience:</strong> {rewards.experience}
-      </p>
-      <p>
-        <strong>Gold:</strong> {rewards.gold}
-      </p>
+      <p>Level Requirement: {levelRequirement}</p>
+      <p>Experience: {rewards.experience}</p>
+      <p>Gold: {rewards.gold}</p>
       <div className="rewards-line">
-        <span className="rewards-label">
-          <strong>Rewards:</strong>
+        <span className="rewards-label" style={{ color: "gray" }}>
+          Rewards:
         </span>
         <div className="reward-buttons">
           {rewards.items &&
             rewards.items.map((item) => (
-              <button className="reward-btn">{getEmoji(item)}</button>
+              <button
+                className="reward-btn"
+                data-tooltip-id="buttonTooltip"
+                data-tooltip-content={isActive ? item.name : ""}
+              >
+                {getEmoji(item)}
+              </button>
             ))}
+          <ReactTooltip
+            id="buttonTooltip"
+            style={{ fontFamily: "MedievalSharp Bold" }}
+          ></ReactTooltip>
         </div>
       </div>
     </div>
