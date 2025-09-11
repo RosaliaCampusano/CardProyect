@@ -1,6 +1,10 @@
+@font-face {
+  font-family: MedievalSharp Bold;
+  src: url("../src/font/medieval-sharp.bold.ttf");
+}
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  background-color: #000000;
+  background-color: black;
+  color: black;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -18,6 +22,7 @@ a:hover {
 
 body {
   background-image: url("./assets/backgroundTemplate.png");
+  background-size: cover;
   margin: 0 0 10px 0;
   display: flex;
   min-width: 320px;
@@ -25,15 +30,24 @@ body {
 }
 
 h1 {
-  font-size: 18px;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 1.2rem;
   line-height: 1.2;
   text-align: center;
   margin: 0 0 10px 0;
+  font-family: MedievalSharp Bold;
+}
+
+h2 {
+  font-size: 15px;
+  text-align: center;
 }
 
 p {
   font-size: 1rem;
+  font-family: MedievalSharp Bold;
   margin: 0 0 10px 0;
+  color: gray;
 }
 
 .card {
@@ -71,7 +85,7 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
   margin: 0;
-  border-color: #000000;
+  border-color: rgba(220, 220, 220, 0.575);
 }
 
 button:focus,
@@ -80,12 +94,18 @@ button:focus-visible {
 }
 
 .objectives-container p {
-  font-size: 14px;
+  font-size: 1rem;
   text-align: left;
+  color: rgb(128, 128, 128);
 }
 
 .location-container {
   text-align: left;
+  font-family: MedievalSharp Bold;
+}
+
+.rewards-label {
+  font-family: MedievalSharp Bold;
 }
 
 .rewards-container {
