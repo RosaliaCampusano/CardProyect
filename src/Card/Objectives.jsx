@@ -1,10 +1,14 @@
-function Objectives({ objectives, setObjectives }) {
-  console.log(objectives);
-  const updateItem = (itemId, isCompleted) => {
+function Objectives({
+  objectives,
+  setObjectives,
+  setInteractingWithObjectives,
+  isActive,
+}) {
+  const updateItem = (itemId) => {
     setObjectives(
       objectives.map((elem) => {
         if (elem.id === itemId) {
-          return { ...elem, completed: isCompleted };
+          return { ...elem, completed: !elem.completed };
         } else {
           return elem;
         }
@@ -12,7 +16,15 @@ function Objectives({ objectives, setObjectives }) {
     );
   };
   return (
-    <div className="objectives-container">
+    <div
+      className="objectives-container"
+      onMouseEnter={() => {
+        setInteractingWithObjectives(true);
+      }}
+      onMouseLeave={() => {
+        setInteractingWithObjectives(false);
+      }}
+    >
       <ul
         style={{
           padding: "10px",
@@ -27,8 +39,8 @@ function Objectives({ objectives, setObjectives }) {
               <input
                 type="checkbox"
                 checked={elem.completed}
-                onClick={() => {
-                  updateItem(elem.id, !elem.completed);
+                onChange={() => {
+                  isActive && updateItem(elem.id);
                 }}
               />
               <strong
