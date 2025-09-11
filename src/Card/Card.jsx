@@ -6,7 +6,8 @@ import { useState } from "react";
 
 function Card(quest) {
   const [questState, setQuest] = useState(quest.quest.quest);
-  console.log(questState);
+  const [isInteractingWithObectives, setInteractingWithObjectives] =
+    useState(false);
   const {
     title,
     description,
@@ -17,6 +18,22 @@ function Card(quest) {
     levelRequirement,
   } = questState;
 
+  const handlerClick = () => {
+    if (!isInteractingWithObectives) {
+      setQuest((quest) => ({
+        ...quest,
+        isActive: !isActive,
+      }));
+    }
+  };
+
+  const updateObjectives = (newObjectives) => {
+    setQuest((quest) => ({
+      ...quest,
+      objectives: newObjectives,
+    }));
+  };
+
   return (
     <div
       className="card"
@@ -25,19 +42,15 @@ function Card(quest) {
         backgroundImage: `url(${cardTemplate})`,
       }}
     >
-      <div
-        className="card-content"
-        onClick={() => {
-          if (isActive) {
-            return setQuest({ ...questState, isActive: false });
-          } else {
-            return setQuest({ ...questState, isActive: true });
-          }
-        }}
-      >
+      <div className="card-content" onClick={handlerClick}>
         <h1>{title}</h1>
         <p>{description}</p>
-        <Objectives objectives={objectives} setObjectives={setQuest} />
+        <Objectives
+          objectives={objectives}
+          setObjectives={updateObjectives}
+          setInteractingWithObjectives={setInteractingWithObjectives}
+          isActive={isActive}
+        />
         <Rewards
           rewards={rewards}
           levelRequirement={levelRequirement}
